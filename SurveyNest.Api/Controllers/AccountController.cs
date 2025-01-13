@@ -9,7 +9,7 @@ using SurveyNest.Api.Constants;
 
 namespace SurveyNest.Api.Controllers;
 
-[Route("[controller]/[action]")]
+[Route("/api/[controller]/[action]")]
 [ApiController]
 public class AccountController : ControllerBase
 {
@@ -39,7 +39,7 @@ public class AccountController : ControllerBase
         _signInManager = signInManager;
     }
 
-    [HttpPost]
+    [HttpPost(Name = "register")]
     public async Task<ActionResult> Register(RegisterDTO input)
     {
         if (!ModelState.IsValid)
@@ -89,7 +89,7 @@ public class AccountController : ControllerBase
     }
 
 
-    [HttpPost]
+    [HttpPost(Name ="login")]
     public async Task<ActionResult> Login(LoginDTO input)
     {
         try
@@ -155,4 +155,20 @@ public class AccountController : ControllerBase
                 exceptionDetails);
         }
     }
+
+    //[HttpPost(Name = "register-oauth")]
+    //public async Task<IActionResult> RegisterOAuth(RegisterOAuthDTO input)
+    //{
+    //    if (!ModelState.IsValid)
+    //    {
+    //        var details = new ValidationProblemDetails(ModelState);
+    //        details.Extensions["traceId"] = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+
+    //        details.Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1";
+    //        details.Status = StatusCodes.Status400BadRequest;
+    //        return new BadRequestObjectResult(details);
+    //    }
+
+    //    throw new NotImplementedException();
+    //}
 }
